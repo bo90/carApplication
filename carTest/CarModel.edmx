@@ -1,0 +1,159 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Хранилище CarTestModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Cars">
+          <Key>
+            <PropertyRef Name="vin" />
+          </Key>
+          <Property Name="vin" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="model" Type="nvarchar" MaxLength="50" />
+          <Property Name="mark" Type="nvarchar" MaxLength="50" />
+          <Property Name="color" Type="nvarchar" MaxLength="50" />
+          <Property Name="gos_nomer" Type="nvarchar" MaxLength="15" />
+          <Property Name="trip" Type="int" />
+          <Property Name="ptc_nom" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Holder">
+          <Key>
+            <PropertyRef Name="vin" />
+          </Key>
+          <Property Name="vin" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="fName" Type="nvarchar" MaxLength="50" />
+          <Property Name="lName" Type="nvarchar" MaxLength="50" />
+          <Property Name="city" Type="nvarchar" MaxLength="50" />
+          <Property Name="telephone" Type="nvarchar" MaxLength="30" />
+          <Property Name="mail" Type="nvarchar" MaxLength="150" />
+        </EntityType>
+        <EntityType Name="t_Order">
+          <Key>
+            <PropertyRef Name="vin" />
+          </Key>
+          <Property Name="vin" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="view_job" Type="nvarchar" MaxLength="50" />
+          <Property Name="time_start" Type="datetime" />
+          <Property Name="time_end" Type="datetime" />
+          <Property Name="date_start" Type="date" />
+          <Property Name="date_end" Type="date" />
+          <Property Name="discrtip_job" Type="nvarchar" MaxLength="200" />
+        </EntityType>
+        <EntityContainer Name="Хранилище CarTestModelContainer">
+          <EntitySet Name="Cars" EntityType="Self.Cars" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Holder" EntityType="Self.Holder" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="t_Order" EntityType="Self.t_Order" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="CarTestModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Holder">
+          <Key>
+            <PropertyRef Name="vin" />
+          </Key>
+          <Property Name="vin" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="fName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="lName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="city" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="telephone" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="mail" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityContainer Name="CarEntity" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Holders" EntityType="Self.Holder" />
+          <EntitySet Name="t_Order" EntityType="CarTestModel.t_Order" />
+          <EntitySet Name="Cars" EntityType="CarTestModel.Car" />
+        </EntityContainer>
+        <EntityType Name="t_Order">
+          <Key>
+            <PropertyRef Name="vin" />
+          </Key>
+          <Property Name="vin" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="view_job" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="time_start" Type="DateTime" Precision="3" />
+          <Property Name="time_end" Type="DateTime" Precision="3" />
+          <Property Name="date_start" Type="DateTime" Precision="0" />
+          <Property Name="date_end" Type="DateTime" Precision="0" />
+          <Property Name="discrtip_job" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Car">
+          <Key>
+            <PropertyRef Name="vin" />
+          </Key>
+          <Property Name="vin" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="model" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="mark" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="color" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="gos_nomer" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="trip" Type="Int32" />
+          <Property Name="ptc_nom" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище CarTestModelContainer" CdmEntityContainer="CarEntity">
+          <EntitySetMapping Name="Holders">
+            <EntityTypeMapping TypeName="CarTestModel.Holder">
+              <MappingFragment StoreEntitySet="Holder">
+                <ScalarProperty Name="mail" ColumnName="mail" />
+                <ScalarProperty Name="telephone" ColumnName="telephone" />
+                <ScalarProperty Name="city" ColumnName="city" />
+                <ScalarProperty Name="vin" ColumnName="vin" />
+                <ScalarProperty Name="fName" ColumnName="fName" />
+                <ScalarProperty Name="lName" ColumnName="lName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="t_Order">
+            <EntityTypeMapping TypeName="CarTestModel.t_Order">
+              <MappingFragment StoreEntitySet="t_Order">
+                <ScalarProperty Name="discrtip_job" ColumnName="discrtip_job" />
+                <ScalarProperty Name="date_end" ColumnName="date_end" />
+                <ScalarProperty Name="date_start" ColumnName="date_start" />
+                <ScalarProperty Name="time_end" ColumnName="time_end" />
+                <ScalarProperty Name="time_start" ColumnName="time_start" />
+                <ScalarProperty Name="view_job" ColumnName="view_job" />
+                <ScalarProperty Name="vin" ColumnName="vin" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cars">
+            <EntityTypeMapping TypeName="CarTestModel.Car">
+              <MappingFragment StoreEntitySet="Cars">
+                <ScalarProperty Name="ptc_nom" ColumnName="ptc_nom" />
+                <ScalarProperty Name="trip" ColumnName="trip" />
+                <ScalarProperty Name="gos_nomer" ColumnName="gos_nomer" />
+                <ScalarProperty Name="color" ColumnName="color" />
+                <ScalarProperty Name="mark" ColumnName="mark" />
+                <ScalarProperty Name="model" ColumnName="model" />
+                <ScalarProperty Name="vin" ColumnName="vin" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

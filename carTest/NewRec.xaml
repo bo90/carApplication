@@ -1,0 +1,53 @@
+﻿<Window x:Class="carTest.NewRec"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:carTest"
+        mc:Ignorable="d"
+        Title="Новая запись" Height="389" Width="566.667" Loaded="Window_Loaded">
+    <Window.Resources>
+        <CollectionViewSource x:Key="carViewSource" d:DesignSource="{d:DesignInstance {x:Type local:Car}, CreateList=True}"/>
+        <CollectionViewSource x:Key="holderViewSource" d:DesignSource="{d:DesignInstance {x:Type local:Holder}, CreateList=True}"/>
+    </Window.Resources>
+    <Grid DataContext="{StaticResource carViewSource}">
+        <Label Content="VIN-номер:" Grid.Row="0"  Margin="13,10,0,0" HorizontalAlignment="Left" Width="80" Height="32" VerticalAlignment="Top"></Label>
+        <TextBox x:Name="VinTextBox" Grid.Row="0" Text="{Binding vin, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Margin="98,16,0,0" HorizontalAlignment="Left" Width="158" Height="20" VerticalAlignment="Top"></TextBox>
+
+        <Label Content="Модель:" Grid.Row="0" Margin="295,10,0,0" HorizontalAlignment="Left" Width="80" Height="31" VerticalAlignment="Top"></Label>
+        <TextBox Margin="380,16,0,0" x:Name="ModelTxtBox" Grid.Row="0" Text="{Binding model, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" HorizontalAlignment="Left" Width="158" Height="19" VerticalAlignment="Top" ></TextBox>
+
+        <Label Content="Марка:" Margin="13,50,0,0" HorizontalAlignment="Left" Width="74" Height="38" VerticalAlignment="Top"></Label>
+        <TextBox x:Name="MarkTxtBoxs" Margin="98,56,0,0" Grid.Row="0" Text="{Binding mark, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" HorizontalAlignment="Left" Width="158" Height="21" VerticalAlignment="Top"/>
+
+        <Label Content="Цвет:" Margin="295,50,0,0" HorizontalAlignment="Left" Width="77" Height="36" VerticalAlignment="Top"></Label>
+        <TextBox x:Name="ColorTxtBox" Margin="380,53,0,0" Grid.Row="0" Text="{Binding color, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" HorizontalAlignment="Left" Width="158" Height="23" VerticalAlignment="Top"></TextBox>
+
+        <Label Content="Гос. №:" Margin="13,100,0,0" HorizontalAlignment="Left" Width="52" Height="24" VerticalAlignment="Top"></Label>
+        <TextBox x:Name="gosNomTxtBox" Margin="98,103,0,0" Text="{Binding gos_nomer, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Height="21" VerticalAlignment="Top" HorizontalAlignment="Left" Width="158"></TextBox>
+
+        <Label Content="№ ПТС:" Margin="295,103,0,0" Height="29" VerticalAlignment="Top" HorizontalAlignment="Left" Width="51"></Label>
+        <TextBox x:Name="ptcTxtBox" Margin="380,103,0,0" Text="{Binding ptc_nom, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Height="21" VerticalAlignment="Top" HorizontalAlignment="Left" Width="158"></TextBox>
+
+        <Label Content="Пробег:" Margin="10,137,0,0" Height="28" VerticalAlignment="Top" HorizontalAlignment="Left" Width="62"></Label>
+        <TextBox x:Name="tripTxtBox" Margin="98,140,0,0" Text="{Binding trip, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Height="22" VerticalAlignment="Top" HorizontalAlignment="Left" Width="158"></TextBox>
+
+        <Label Content="Фамилия владельца:" Margin="13,191,0,0" HorizontalAlignment="Left" Width="120" Height="24" VerticalAlignment="Top"></Label>
+        <TextBox x:Name="lNameTxtBox" Margin="138,195,0,0" Text="{Binding lName, Mode=TwoWay, NotifyOnValidationError=true, Source={StaticResource holderViewSource}, ValidatesOnExceptions=true}" Height="20" VerticalAlignment="Top" HorizontalAlignment="Left" Width="400"></TextBox>
+
+        <Label Content="Имя:" Margin="13,227,0,0" Height="25" VerticalAlignment="Top" HorizontalAlignment="Left" Width="44"></Label>
+        <TextBox x:Name="fNameTxtBox" Margin="62,231,0,0" Text="{Binding fName, Mode=TwoWay, NotifyOnValidationError=true, Source={StaticResource holderViewSource}, ValidatesOnExceptions=true}" Height="20" VerticalAlignment="Top" HorizontalAlignment="Left" Width="194"></TextBox>
+
+        <Label Content="Город:" Margin="270,227,0,0" Height="29" VerticalAlignment="Top" HorizontalAlignment="Left" Width="61"></Label>
+        <TextBox x:Name="cityTxtbox" Margin="325,231,0,0" Text="{Binding city, Mode=TwoWay, NotifyOnValidationError=true, Source={StaticResource holderViewSource}, ValidatesOnExceptions=true}" Height="20" VerticalAlignment="Top" HorizontalAlignment="Left" Width="213"></TextBox>
+
+        <Label Content="Телефон:" Margin="13,261,0,0" HorizontalAlignment="Left" Width="59" Height="24" VerticalAlignment="Top"/>
+        <TextBox x:Name="telTxtBox" Margin="77,266,0,0" Text="{Binding telephone, Mode=TwoWay, NotifyOnValidationError=true, Source={StaticResource holderViewSource}, ValidatesOnExceptions=true}" Height="19" VerticalAlignment="Top" HorizontalAlignment="Left" Width="179"></TextBox>
+
+        <Label Content="Эл.почта:" Margin="270,261,0,0" Height="27" VerticalAlignment="Top" HorizontalAlignment="Left" Width="61"></Label>
+        <TextBox x:Name="mailTxtbox" Margin="336,266,0,0" Height="19" VerticalAlignment="Top" HorizontalAlignment="Left" Width="202" Text="{Binding mail, Mode=TwoWay, NotifyOnValidationError=true, Source={StaticResource holderViewSource}, ValidatesOnExceptions=true}"></TextBox>
+        <Button Margin="44,311,0,0" x:Name="btn_create" Content="Создать запись" Click="btn_create_Click" HorizontalAlignment="Left" Width="112" Height="25" VerticalAlignment="Top"></Button>
+        <Button x:Name="btn_NewOrder" Visibility="Collapsed" Content="Создать заказ" Margin="231,311,0,0" Click="btn_NewOrder_Click" Height="25" VerticalAlignment="Top" HorizontalAlignment="Left" Width="128"></Button>
+        <Button Content="Закрыть" Margin="440,311,0,0" Click="Button_Click" Height="25" VerticalAlignment="Top" HorizontalAlignment="Left" Width="103"></Button>
+    </Grid>
+</Window>

@@ -1,0 +1,37 @@
+﻿<Window x:Class="carTest.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:carTest"
+        mc:Ignorable="d"
+        Title="Авто+" Height="600" Width="934.426" Loaded="Window_Loaded" Closing="Window_Closing">
+    <Window.Resources>
+        <CollectionViewSource x:Key="carsViewSource" d:DesignSource="{d:DesignInstance {x:Type local:Cars}, CreateList=True}"/>
+    </Window.Resources>
+    <Grid DataContext="{StaticResource carsViewSource}">
+        <DataGrid x:Name="dGrid" HorizontalAlignment="Left" Height="468" Margin="10,51,0,0" VerticalAlignment="Top" Width="682" ItemsSource="{Binding}" AutoGenerateColumns="False" SelectionChanged="dGrid_SelectionChanged">
+            <DataGrid.Columns>
+                <DataGridTextColumn x:Name="VinColumn" Binding="{Binding vin}" Header="VIN-номер" Width="120"></DataGridTextColumn>
+                <DataGridTextColumn x:Name="MarkColumn" Binding="{Binding mark}" Header="Марка" Width="70"></DataGridTextColumn>
+                <DataGridTextColumn x:Name="modelColumn" Binding="{Binding model}" Header="Модель" Width="120"></DataGridTextColumn>
+                <DataGridTextColumn x:Name="colorColumn" Binding="{Binding gos_nomer}" Header="Гос. №" Width="100"></DataGridTextColumn>
+                <DataGridTextColumn x:Name="colorCol" Binding="{Binding color}" Header="Цвет" Width="60"></DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button Content="Удаленить запись" x:Name="But_del" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="120" Click="But_del_Click"/>
+        <StackPanel Margin="697,51,0,50" HorizontalAlignment="Left" Width="223">
+            <Expander Header="Создать">
+                <StackPanel>
+                    <TextBlock x:Name="Create_new_rec" Text="Создать новую запись" Margin="35,0,0,0" MouseDown="Create_new_rec_MouseDown" ClipToBounds="True"/>
+                    <TextBlock x:Name="NewOrder" Text="Создать новый заказ" Margin="35,0,0,0" MouseDown="NewOrder_MouseDown"></TextBlock>
+                </StackPanel>
+            </Expander>
+            <Expander Header="Справочная информация">
+                <StackPanel>
+                    <TextBlock x:Name="allInfo" Text="Показать всю информацию" Margin="35,0,0,0"></TextBlock>
+                </StackPanel>
+            </Expander>
+        </StackPanel>
+    </Grid>
+</Window>
